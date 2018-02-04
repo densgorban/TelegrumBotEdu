@@ -22,18 +22,24 @@ public class DenisTeachersBot extends TelegramLongPollingBot {
 
     }
 
-    /**
-     * correct input: "Lesson N{1-6}
-     * incorrect inputs
-     *      Lesson 7
-     *      Lesson  blabla
-     *      Lesson
-     * */
     private String getLessonMessage(Message message) {
         String[] splittedMessage = message.getText().split(" ");
-
-        return
-                "";
+        int lessonNumber = 0;
+        try {
+            lessonNumber = Integer.parseInt(splittedMessage[1]);
+        } catch(NumberFormatException nfe){
+            System.out.println(nfe);
+            return "Error on parsing integer";
+        }
+        switch(lessonNumber) {
+            case 1: return "Install and Run Telegram Chat bot";
+            case 2: return "Investigate how Chat Bot Works";
+            case 3: return "What is Object Oriented Programming?";
+            case 4: return "Errors and Exceptions";
+            case 5: return "Data Stricture: List, Set, Map";
+            case 6: return "Questions & Answers";
+            default: return "Please enter correct number";
+        }
     }
 
     private String getPlanMessage() {
