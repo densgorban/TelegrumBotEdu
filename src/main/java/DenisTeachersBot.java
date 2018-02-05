@@ -66,12 +66,12 @@ public class DenisTeachersBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return System.getProperty("bot.name");
+        return "MY_BOT_NAME";
     }
 
     @Override
     public String getBotToken() {
-        return System.getProperty("bot.key");
+        return "12345:MY_BOT_KEY_67890";
     }
 
     public static void main(String[] args) {
