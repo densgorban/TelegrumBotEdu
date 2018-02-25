@@ -2,6 +2,6 @@ package study.oop;
 
 public interface Vehicle {
 
-    void voice();
+    void voice() throws EngineException;
 
 }

@@ -6,6 +6,7 @@ import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import study.oop.HeavyAuto;
 
 public class DenisTeachersBot extends TelegramLongPollingBot {
 
@@ -13,16 +14,28 @@ public class DenisTeachersBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
         if(message !=null && message.hasText()) {
-            switch (message.getText()){
-                case "-help": sendMessage(message,
-                        "How can I help you?"); break;
-                case "Plan": sendMessage(message, getPlanMessage()); break;
-                case "Lesson": sendMessage(message, getLessonMessage(message)); break;
-                default: sendMessage(message,"default message");
+            String messageText = message.getText().trim().toLowerCase();
+
+            if(messageText.equals("-help")){
+                sendMessage(message,  "How can I help you?");
+            } else if(messageText.equals("plan")){
+                sendMessage(message, getPlanMessage());
+            } else if(messageText.contains("lesson")){
+                sendMessage(message, getLessonMessage(message));
+            } else {
+                sendMessage(message,"default message");
+            }
+
+//            switch (message.getText()){
+//                case "-help": sendMessage(message,
+//                        "How can I help you?"); break;
+//                case "Plan": sendMessage(message, getPlanMessage()); break;
+//                case "Lesson": sendMessage(message, getLessonMessage(message)); break;
+//                default: sendMessage(message,"default message");
             }
         }
 
-    }
+
 
     private String getLessonMessage(Message message) {
         String[] splittedMessage = message.getText().split(" ");
@@ -60,8 +73,9 @@ public class DenisTeachersBot extends TelegramLongPollingBot {
         s.setChatId(message.getChatId()); // Боту может писать не один человек, и поэтому чтобы отправить сообщение, грубо говоря нужно узнать куда его отправлять
         s.setText(text);
         try { //Чтобы не крашнулась программа при вылете Exception
-            sendMessage(s);
+            sendApiMethod(s);
         } catch (TelegramApiException e){
+            System.out.println("TelegramApiException block");
             e.printStackTrace();
         }
     }
@@ -73,7 +87,7 @@ public class DenisTeachersBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "473102786:AAEA8DWzRuo09esFTvDoTgt6S8SXgu0OqiY++";
+        return "473102786:AAEA8DWzRuo09esFTvDoTgt6S8SXgu0OqiY";
     }
 
     //Enter point
