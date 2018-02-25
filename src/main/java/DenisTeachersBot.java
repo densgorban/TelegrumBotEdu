@@ -1,3 +1,4 @@
+import com.sun.javafx.geom.transform.CanTransformVec3d;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
@@ -13,7 +14,8 @@ public class DenisTeachersBot extends TelegramLongPollingBot {
         Message message = update.getMessage();
         if(message !=null && message.hasText()) {
             switch (message.getText()){
-                case "-help": sendMessage(message, "How can I help you?"); break;
+                case "-help": sendMessage(message,
+                        "How can I help you?"); break;
                 case "Plan": sendMessage(message, getPlanMessage()); break;
                 case "Lesson": sendMessage(message, getLessonMessage(message)); break;
                 default: sendMessage(message,"default message");
@@ -66,14 +68,15 @@ public class DenisTeachersBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "MY_BOT_NAME";
+        return "denis_teacher_bot";
     }
 
     @Override
     public String getBotToken() {
-        return "12345:MY_BOT_KEY_67890";
+        return "473102786:AAEA8DWzRuo09esFTvDoTgt6S8SXgu0OqiY++";
     }
 
+    //Enter point
     public static void main(String[] args) {
         ApiContextInitializer.init(); // Инициализируем апи
         TelegramBotsApi botapi = new TelegramBotsApi();
